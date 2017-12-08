@@ -7,7 +7,56 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <!--<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        
+    </Grid>-->
 
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="75" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0">
+            <ListBox>
+                <ListBoxItem>
+                    <TextBlock>TESTE</TextBlock>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <TextBlock>TESTE</TextBlock>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <TextBlock>TESTE</TextBlock>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <TextBlock>TESTE</TextBlock>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <TextBlock>TESTE</TextBlock>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <TextBlock>TESTE</TextBlock>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <TextBlock>TESTE</TextBlock>
+                </ListBoxItem>
+            </ListBox>
+        </StackPanel>
+
+
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <Button Background="Transparent" Click="{x:Bind ViewModel.AddReceita_Click}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Symbol="Add" Height="24" Width="24" Margin="0,0,12,0"/>
+                        <TextBlock Text="Nova Receita" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>
