@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using UWP.AvaliacaoFinal.Pages;
 using UWP.AvaliacaoFinal.Services;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace UWP.AvaliacaoFinal.ViewModel
 {
@@ -16,5 +17,7 @@ namespace UWP.AvaliacaoFinal.ViewModel
         {
             NavigationService.Navigate<IncluirReceitaPage>();
         }
+
+        
     }
 }

@@ -1,4 +1,5 @@
 ﻿using UWP.AvaliacaoFinal.ViewModel;
+using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -17,5 +18,9 @@ namespace UWP.AvaliacaoFinal
             this.InitializeComponent();
         }
 
+        private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (this.Frame.CanGoBack) this.Frame.GoBack();
+        }
     }
 }
