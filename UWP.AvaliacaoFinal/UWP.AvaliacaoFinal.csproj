@@ -92,6 +92,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Abstracts\NotifyableClass.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -100,9 +101,6 @@
     </Compile>
     <Compile Include="Pages\IncluirReceitaPage.xaml.cs">
       <DependentUpon>IncluirReceitaPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ListaReceitasPage.xaml.cs">
-      <DependentUpon>ListaReceitasPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ReceitaDetalhePage.xaml.cs">
       <DependentUpon>ReceitaDetalhePage.xaml</DependentUpon>
@@ -119,6 +117,8 @@
     <None Include="UWP.AvaliacaoFinal_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\bolo.jpg" />
+    <Content Include="Images\recipe.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -138,10 +138,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\IncluirReceitaPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\ListaReceitasPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
