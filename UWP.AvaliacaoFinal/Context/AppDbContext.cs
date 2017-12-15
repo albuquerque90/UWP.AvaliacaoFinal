@@ -11,9 +11,14 @@
         #region Properties
 
         /// <summary>
-        /// Gets or sets the receita set.
+        /// Gets or sets da receita .
         /// </summary>
         public DbSet<Receita> Receitas { get; set; }
+
+        /// <summary>
+        /// Gets or sets do tipo de receita.
+        /// </summary>
+        public DbSet<TipoReceita> TiposReceita { get; set; }
 
         #endregion
 

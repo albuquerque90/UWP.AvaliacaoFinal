@@ -1,23 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UWP.AvaliacaoFinal.Model
+﻿namespace UWP.AvaliacaoFinal.Model
 {
+    using System;
+
+    /// <summary>
+    /// Define a classe modelo da receita
+    /// </summary>
     public class Receita
     {
-        public int Id { get; set; }
-        public string Titulo { get; set; }
-        public string ModoPreparo { get; set; }
-        public string Ingredientes { get; set; }
-        public TipoReceita TipoReceita { get; set; }
-    }
+        #region Properties
 
-    public class TipoReceita
-    {
-        public int Id { get; set; }
-        public string Descricao { get; set; }
+        /// <summary>
+        /// Gets or sets do id.
+        /// </summary>
+        public Guid Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets do id do tipo da receita.
+        /// </summary>
+        public Guid TipoReceitaId { get; set; }
+
+        /// <summary>
+        /// Gets or sets do título.
+        /// </summary>
+        public string Titulo { get; set; }
+
+        /// <summary>
+        /// Gets or sets do modo de preparo.
+        /// </summary>
+        public string ModoPreparo { get; set; }
+
+        /// <summary>
+        /// Gets or sets dos ingredientes.
+        /// </summary>
+        public string Ingredientes { get; set; }
+
+        /// <summary>
+        /// Gets or sets do tipo de receita.
+        /// </summary>
+        public virtual TipoReceita TipoReceita { get; set; }
+
+        #endregion
     }
 }

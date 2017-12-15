@@ -24,7 +24,7 @@ namespace UWP.AvaliacaoFinal.Pages
     /// </summary>
     public sealed partial class IncluirReceitaPage : Page
     {
-        public IncluirReceitaViewModel ViewModel { get; } = new IncluirReceitaViewModel();
+        public ReceitaViewModel ViewModel { get; } = new ReceitaViewModel();
 
         public IncluirReceitaPage()
         {
