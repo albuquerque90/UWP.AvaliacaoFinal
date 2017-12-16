@@ -10,48 +10,38 @@
     using Windows.UI.Xaml.Controls;
 
     /// <summary>
-    /// Define a classe de modelo de visualização de receita.
+    /// Define a classe de modelo de visualização de tipo de receita.
     /// </summary>
-    public class ReceitaViewModel : NotifyableClass
+    public class TipoReceitaViewModel : NotifyableClass
     {
         #region Variables
 
         /// <summary>
         /// Sets a receita.
         /// </summary>
-        private Receita _Receita;
+        private TipoReceita _TipoReceita;
 
         #endregion
 
         #region Properties
-
-        /// <summary>
-        /// Gets a instância do repositório de receita.
-        /// </summary>
-        public EFReceitaRepository ReceitaRepository => EFReceitaRepository.Instance;
-
+        
         /// <summary>
         /// Gets a instância do repositório de tipos de receita.
         /// </summary>
         public EFTipoReceitaRepository TipoReceitaRepository => EFTipoReceitaRepository.Instance;
-
-        /// <summary>
-        /// Gets a coleção de receitas do repositório.
-        /// </summary>
-        public ObservableCollection<Receita> Receitas => ReceitaRepository.Items;
-
+        
         /// <summary>
         /// Gets a coleção de tipos de receitas do repositório.
         /// </summary>
         public ObservableCollection<TipoReceita> TiposReceita => TipoReceitaRepository.Items;
         
         /// <summary>
-        /// Gets or sets a receita.
+        /// Gets or sets o tipo da receita.
         /// </summary>
-        public Receita Receita
+        public TipoReceita TipoReceita
         {
-            get { return _Receita; }
-            set { Set(ref _Receita, value); }
+            get { return _TipoReceita; }
+            set { Set(ref _TipoReceita, value); }
         }
 
         #endregion
@@ -63,13 +53,13 @@
         /// </summary>
         public async void SaveReceita_Click()
         {
-            if (Receitas.Any(t => t.Id == Receita.Id))
+            if (TiposReceita.Any(t => t.Id == TipoReceita.Id))
             {
-                await ReceitaRepository.Update(Receita);
+                await TipoReceitaRepository.Update(TipoReceita);
             }
             else
             {
-                await ReceitaRepository.Create(Receita);
+                await TipoReceitaRepository.Create(TipoReceita);
             }
 
             if (NavigationService.CanGoBack)

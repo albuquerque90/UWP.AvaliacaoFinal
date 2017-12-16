@@ -1,27 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-namespace UWP.AvaliacaoFinal
+﻿namespace UWP.AvaliacaoFinal
 {
+    using Microsoft.EntityFrameworkCore;
+    using System;
+    using UWP.AvaliacaoFinal.Context;
+    using UWP.AvaliacaoFinal.Services;
+    using Windows.ApplicationModel;
+    using Windows.ApplicationModel.Activation;
+    using Windows.UI.Core;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Navigation;
+
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
     sealed partial class App : Application
     {
+        #region Constructors
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -30,7 +26,18 @@ namespace UWP.AvaliacaoFinal
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            using (var context = new AppDbContext())
+            {
+                context.Database.Migrate();
+            }
         }
+
+        #endregion
+
+        #region Methods
+
+        #region Events
 
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
@@ -50,6 +57,18 @@ namespace UWP.AvaliacaoFinal
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
+                rootFrame.Navigated += (s, evt) =>
+                {
+                    if (rootFrame.CanGoBack)
+                    {
+                        SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+                    }
+                    else
+                    {
+                        SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+                    }
+                };
+
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
@@ -57,6 +76,14 @@ namespace UWP.AvaliacaoFinal
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
+
+                NavigationService.Frame = rootFrame;
+
+                if (SystemNavigationManager.GetForCurrentView() != null)
+                {
+                    SystemNavigationManager.GetForCurrentView().BackRequested -= App_BackRequested;
+                    SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
+                }
             }
 
             if (e.PrelaunchActivated == false)
@@ -70,6 +97,20 @@ namespace UWP.AvaliacaoFinal
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void App_BackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
+        {
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+                e.Handled = true;
             }
         }
 
@@ -96,5 +137,9 @@ namespace UWP.AvaliacaoFinal
             //TODO: Save application state and stop any background activity
             deferral.Complete();
         }
+
+        #endregion
+
+        #endregion
     }
 }

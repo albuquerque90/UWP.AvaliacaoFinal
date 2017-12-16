@@ -41,7 +41,7 @@
             {
                 using (var context = new AppDbContext())
                 {
-                    foreach (var item in context.Receitas.ToList())
+                    foreach (var item in context.Receita.ToList())
                     {
                         Items.Add(item);
                     }
@@ -63,7 +63,7 @@
                 entity.Id = Guid.NewGuid();
                 Items.Add(entity);
 
-                context.Receitas.Add(entity);
+                context.Receita.Add(entity);
                 await context.SaveChangesAsync();
             }
         }
@@ -104,7 +104,7 @@
                 {
                     Items.Remove(category);
 
-                    context.Receitas.Remove(category);
+                    context.Receita.Remove(category);
                     await context.SaveChangesAsync();
                 }
             }

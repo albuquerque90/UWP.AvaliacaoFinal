@@ -15,8 +15,37 @@ using Windows.UI.Xaml.Controls;
 
 namespace UWP.AvaliacaoFinal.ViewModel
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class MainPageViewModel : NotifyableClass
     {
+        #region Variables
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private Receita _receita;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private bool _isSplitViewOpen;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private TipoReceita _selectedTipoReceita;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private IEnumerable<Receita> _filteredReceitaItems;
+
+        #endregion
+
+        #region Properties
+
         /// <summary>
         /// Gets a instância do repositório de receita.
         /// </summary>
@@ -27,86 +56,143 @@ namespace UWP.AvaliacaoFinal.ViewModel
         /// </summary>
         public EFTipoReceitaRepository TipoReceitaRepository => EFTipoReceitaRepository.Instance;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ObservableCollection<Receita> ReceitaItens => ReceitaRepository.Items;
 
-        public async Task Initialize()
-        {
-            await TipoReceitaRepository.LoadAll();
-            await ReceitaRepository.LoadAll();
+        /// <summary>
+        /// 
+        /// </summary>
+        public ObservableCollection<TipoReceita> TipoReceitaItens => TipoReceitaRepository.Items;
 
-            LstReceitas = ReceitaItens;
-        }
-
-        private IEnumerable<Receita> _lstReceitas;
-        public IEnumerable<Receita> LstReceitas
-        {
-            get { return _lstReceitas; }
-            set
-            {
-                Set(ref _lstReceitas, value);
-            }
-        }
-
-        public enum PageState
-        {
-            MinWidth0 = 0,
-            MinWidth700
-        }
-
-        public PageState State { get; set; }
-
-        private Receita _receita;
+        /// <summary>
+        /// 
+        /// </summary>
         public Receita Receita
         {
             get { return _receita ?? new Receita(); }
             set { Set(ref _receita, value); }
         }
 
-
-        private bool _isSplitViewOpen;
-
+        /// <summary>
+        /// 
+        /// </summary>
         public bool IsSplitViewOpen
         {
             get { return _isSplitViewOpen; }
             set { Set(ref _isSplitViewOpen, value); }
         }
 
-        public void AddReceita_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        public IEnumerable<Receita> FilteredReceitaItems
         {
-            NavigationService.Navigate<IncluirReceitaPage>();
+            get { return _filteredReceitaItems; }
+            set
+            {
+                var newValue = value;
+
+                if (SelectedTipoReceita != null)
+                {
+                    newValue = newValue.Where(t => t.TipoReceitaId == SelectedTipoReceita.Id);
+                }
+
+                Set(ref _filteredReceitaItems, newValue);
+            }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public TipoReceita SelectedTipoReceita
+        {
+            get { return _selectedTipoReceita; }
+            set
+            {
+                if (Equals(_selectedTipoReceita, value))
+                {
+                    return;
+                }
+
+                Set(ref _selectedTipoReceita, value);
+
+                FilteredReceitaItems = ReceitaItens;
+            }
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task Initialize()
+        {
+            await TipoReceitaRepository.LoadAll();
+            await ReceitaRepository.LoadAll();
+
+            ReceitaItens.CollectionChanged += ReceitaItens_CollectionChanged;
+            TipoReceitaItens.CollectionChanged += TipoReceitaItens_CollectionChanged;
+        }
+
+        #region Events
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void HamburguerButton_Click(object sender, RoutedEventArgs e)
         {
             IsSplitViewOpen = !IsSplitViewOpen;
         }
 
-        public  void AddTipoReceitaButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void AddReceita_Click(object sender, RoutedEventArgs e)
         {
-            
+            NavigationService.Navigate<IncluirReceitaPage>();
         }
 
-        public void teste_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void AddTipoReceitaButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate<ReceitaDetalhePage>();
-
-
-
-            var listView = (ListView)sender;
-
-            if (listView.SelectedItem == null)
-            {
-                return;
-            }
-
-            if (State == PageState.MinWidth700)
-            {
-                Receita = JsonConvert.DeserializeObject<Receita>(JsonConvert.SerializeObject(listView.SelectedItem));
-            }
-            else
-            {
-                NavigationService.Navigate<ReceitaDetalhePage>(listView.SelectedItem);
-            }
+            NavigationService.Navigate<IncluirTipoReceitaPage>();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TipoReceitaItens_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ReceitaItens_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #endregion
     }
 }
