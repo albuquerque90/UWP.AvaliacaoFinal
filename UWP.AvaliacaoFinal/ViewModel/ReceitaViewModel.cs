@@ -2,6 +2,9 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using UWP.AvaliacaoFinal.Abstracts;
     using UWP.AvaliacaoFinal.Model;
     using UWP.AvaliacaoFinal.Repositories;
     using UWP.AvaliacaoFinal.Services;
@@ -10,7 +13,7 @@
     /// <summary>
     /// Define a classe de modelo de visualização de receita.
     /// </summary>
-    public class ReceitaViewModel
+    public class ReceitaViewModel : NotifyableClass
     {
         #region Properties
 
@@ -34,6 +37,14 @@
         /// </summary>
         public ObservableCollection<TipoReceita> TiposReceita => TipoReceitaRepository.Items;
 
+        private Receita _receita;
+
+        public Receita Receita
+        {
+            get { return _receita; }
+            set { Set(ref _receita, value); }
+        }
+
         #endregion
 
         public async void CancelReceita_Click()
@@ -53,6 +64,23 @@
             };
 
             await dialog.ShowAsync();
+        }
+
+        public async void SaveReceita_Click()
+        {
+            if (Receitas.Any(t => t.Id == Receita.Id))
+            {
+                await ReceitaRepository.Update(Receita);
+            }
+            else
+            {
+                await ReceitaRepository.Create(Receita);
+            }
+
+            if (NavigationService.CanGoBack)
+            {
+                NavigationService.GoBack();
+            }
         }
     }
 }

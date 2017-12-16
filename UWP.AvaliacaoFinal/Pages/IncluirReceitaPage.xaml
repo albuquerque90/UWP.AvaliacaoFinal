@@ -5,6 +5,7 @@
     xmlns:local="using:UWP.AvaliacaoFinal.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:UWP.AvaliacaoFinal.Model"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -37,26 +38,26 @@
 
         <StackPanel Grid.Column="1" Grid.Row="3">
             <ComboBox Header="Tipo de Receita" PlaceholderText="Selecione o tipo da receita">
-                <!--<ComboBox.ItemTemplate>
-                    <DataTemplate x:DataType="model:Category">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate x:DataType="model:TipoReceita">
                         <StackPanel Orientation="Horizontal">
-                            <Ellipse Height="20" Width="20" Margin="12,0">
+                            <!--<Ellipse Height="20" Width="20" Margin="12,0">
                                 <Ellipse.Fill>
-                                    <SolidColorBrush Color="{x:Bind Color}" />
+                                    <SolidColorBrush Color="{x:Bind }" />
                                 </Ellipse.Fill>
-                            </Ellipse>
-                            <TextBlock Text="{x:Bind Description}" />
+                            </Ellipse>-->
+                            <TextBlock Text="{x:Bind Descricao}" />
                         </StackPanel>
                     </DataTemplate>
-                </ComboBox.ItemTemplate>-->
+                </ComboBox.ItemTemplate>
             </ComboBox>
 
         </StackPanel>
 
         <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
-            <Button >
-                <Button.Content>
-                    <SymbolIcon Symbol="Save"/>
+            <Button x:Name="btnSave" Click="{x:Bind ViewModel.SaveReceita_Click}">
+                <Button.Content >
+                    <SymbolIcon Symbol="Save" />
                 </Button.Content>
             </Button>
             <Button  x:Name="btnCancel" Click="{x:Bind ViewModel.CancelReceita_Click}">
