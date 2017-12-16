@@ -2,6 +2,7 @@
 {
     using Microsoft.EntityFrameworkCore;
     using System;
+    using System.Linq;
     using UWP.AvaliacaoFinal.Context;
     using UWP.AvaliacaoFinal.Services;
     using Windows.ApplicationModel;
@@ -30,6 +31,15 @@
             using (var context = new AppDbContext())
             {
                 context.Database.Migrate();
+
+                if (context.TipoReceita.Any())
+                {
+                    context.TipoReceita.Add(new Model.TipoReceita() { Id = Guid.NewGuid(), Descricao = "Tipo de Receita 1" });
+                    context.TipoReceita.Add(new Model.TipoReceita() { Id = Guid.NewGuid(), Descricao = "Tipo de Receita 2" });
+                    context.TipoReceita.Add(new Model.TipoReceita() { Id = Guid.NewGuid(), Descricao = "Tipo de Receita 3" });
+
+                    context.SaveChanges();
+                }
             }
         }
 

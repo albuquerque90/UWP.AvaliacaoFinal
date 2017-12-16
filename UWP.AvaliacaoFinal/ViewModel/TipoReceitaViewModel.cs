@@ -5,6 +5,7 @@
     using System.Linq;
     using UWP.AvaliacaoFinal.Abstracts;
     using UWP.AvaliacaoFinal.Model;
+    using UWP.AvaliacaoFinal.Pages;
     using UWP.AvaliacaoFinal.Repositories;
     using UWP.AvaliacaoFinal.Services;
     using Windows.UI.Xaml.Controls;
@@ -51,7 +52,15 @@
         /// <summary>
         /// Persiste a receita no banco de dados.
         /// </summary>
-        public async void SaveReceita_Click()
+        public void AddTipoReceita_Click()
+        {
+            NavigationService.Navigate<IncluirTipoReceitaPage>(new TipoReceita());
+        }
+
+        /// <summary>
+        /// Persiste a receita no banco de dados.
+        /// </summary>
+        public async void SaveTipoReceita_Click()
         {
             if (TiposReceita.Any(t => t.Id == TipoReceita.Id))
             {
@@ -71,7 +80,7 @@
         /// <summary>
         /// 
         /// </summary>
-        public async void CancelReceita_Click()
+        public async void CancelTipoReceita_Click()
         {
             var dialog = new ContentDialog
             {

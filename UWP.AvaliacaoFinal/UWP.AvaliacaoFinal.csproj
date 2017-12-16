@@ -114,6 +114,9 @@
     <Compile Include="Pages\IncluirReceitaPage.xaml.cs">
       <DependentUpon>IncluirReceitaPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\TipoReceitaListPage.xaml.cs">
+      <DependentUpon>TipoReceitaListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ReceitaDetalhePage.xaml.cs">
       <DependentUpon>ReceitaDetalhePage.xaml</DependentUpon>
     </Compile>
@@ -160,6 +163,10 @@
     <Page Include="Pages\IncluirReceitaPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TipoReceitaListPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\ReceitaDetalhePage.xaml">
       <SubType>Designer</SubType>

@@ -1,7 +1,5 @@
 ﻿namespace UWP.AvaliacaoFinal.Pages
 {
-    using Newtonsoft.Json;
-    using UWP.AvaliacaoFinal.Model;
     using UWP.AvaliacaoFinal.ViewModel;
     using Windows.UI.Core;
     using Windows.UI.Xaml.Controls;
@@ -10,7 +8,7 @@
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class IncluirTipoReceitaPage : Page
+    public sealed partial class TipoReceitaListPage : Page
     {
         #region Properties
 
@@ -26,7 +24,7 @@
         /// <summary>
         /// 
         /// </summary>
-        public IncluirTipoReceitaPage()
+        public TipoReceitaListPage()
         {
             this.InitializeComponent();
         }
@@ -35,20 +33,15 @@
 
         #region Methods
 
-        #region Events
-        
         /// <summary>
         /// 
         /// </summary>
         /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var item = JsonConvert.DeserializeObject<TipoReceita>(e.Parameter.ToString());
-
-            if (item != null)
-            {
-                ViewModel.TipoReceita = item;
-            }
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
+            base.OnNavigatedTo(e);
         }
 
         /// <summary>
@@ -60,8 +53,6 @@
         {
             if (this.Frame.CanGoBack) this.Frame.GoBack();
         }
-
-        #endregion
 
         #endregion
     }

@@ -156,19 +156,19 @@ namespace UWP.AvaliacaoFinal.ViewModel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void AddReceita_Click(object sender, RoutedEventArgs e)
+        public void AddReceitaButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate<IncluirReceitaPage>();
         }
-
+        
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void AddTipoReceitaButton_Click(object sender, RoutedEventArgs e)
+        public void TipoReceitaButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate<IncluirTipoReceitaPage>();
+            NavigationService.Navigate<TipoReceitaListPage>();
         }
 
         /// <summary>

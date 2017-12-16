@@ -3,17 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:model="using:UWP.AvaliacaoFinal.Model"
     mc:Ignorable="d">
-
-    <Page.BottomAppBar>
-        <CommandBar>
-            <CommandBar.PrimaryCommands>
-                <AppBarButton x:Name="btnSaveReceita" Label="Nova Receita" Icon="Add" Click="{x:Bind ViewModel.AddReceita_Click}" />
-            </CommandBar.PrimaryCommands>
-        </CommandBar>
-    </Page.BottomAppBar>
-
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -25,26 +16,8 @@
             <RowDefinition Height="75" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Column="1">
-
-            <ListView x:Name="listView" ItemsSource="{x:Bind ViewModel.TipoReceitaItens, Mode=OneWay}">
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="model:TipoReceita">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="{x:Bind Descricao}" Grid.Column="1" />
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackPanel>
-
-        <SplitView Grid.Column="0"  x:Name="splitView" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
-            IsPaneOpen="{x:Bind ViewModel.IsSplitViewOpen, Mode=TwoWay}"
-            OpenPaneLength="220" DisplayMode="CompactOverlay" CompactPaneLength="44">
+        <SplitView Grid.Column="0" IsPaneOpen="True"
+                   Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <SplitView.Pane>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -53,15 +26,21 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Button Width="44" Height="44" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" Background="Transparent" Click="{x:Bind ViewModel.HamburguerButton_Click}" />
-
                     <ScrollViewer Grid.Row="1">
                         <StackPanel>
-                            <Button Background="Transparent" Click="{x:Bind ViewModel.AddTipoReceitaButton_Click}">
+                            <Button Background="Transparent" Click="{x:Bind ViewModel.TipoReceitaButton_Click}">
                                 <Button.Content>
                                     <StackPanel Orientation="Horizontal">
-                                        <SymbolIcon Symbol="Add" Height="24" Width="24" Margin="0,0,12,0"/>
-                                        <TextBlock Text="Novo Tipo de Receita" />
+                                        <SymbolIcon Symbol="Globe" Height="24" Width="24" Margin="0,0,12,0"/>
+                                        <TextBlock Text="Tipo de Receita" />
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button Background="Transparent" Click="{x:Bind ViewModel.AddReceitaButton_Click}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <SymbolIcon Symbol="Next" Height="24" Width="24" Margin="0,0,12,0"/>
+                                        <TextBlock Text="Receita" />
                                     </StackPanel>
                                 </Button.Content>
                             </Button>
