@@ -3,6 +3,7 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using UWP.AvaliacaoFinal.Abstracts;
     using UWP.AvaliacaoFinal.Model;
     using UWP.AvaliacaoFinal.Pages;
@@ -50,6 +51,15 @@
         #region Methods
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task Initialize()
+        {
+            await TipoReceitaRepository.LoadAll();
+        }
+
+        /// <summary>
         /// Persiste a receita no banco de dados.
         /// </summary>
         public void AddTipoReceita_Click()
@@ -94,6 +104,7 @@
             dialog.PrimaryButtonClick += async (s, e) =>
             {
                 NavigationService.GoBack();
+                await Task.CompletedTask;
             };
 
             await dialog.ShowAsync();

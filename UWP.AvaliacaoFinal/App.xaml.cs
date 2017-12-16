@@ -31,8 +31,8 @@
             using (var context = new AppDbContext())
             {
                 context.Database.Migrate();
-
-                if (context.TipoReceita.Any())
+                
+                if (!context.TipoReceita.Any())
                 {
                     context.TipoReceita.Add(new Model.TipoReceita() { Id = Guid.NewGuid(), Descricao = "Tipo de Receita 1" });
                     context.TipoReceita.Add(new Model.TipoReceita() { Id = Guid.NewGuid(), Descricao = "Tipo de Receita 2" });
@@ -86,14 +86,6 @@
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
-
-                NavigationService.Frame = rootFrame;
-
-                if (SystemNavigationManager.GetForCurrentView() != null)
-                {
-                    SystemNavigationManager.GetForCurrentView().BackRequested -= App_BackRequested;
-                    SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
-                }
             }
 
             if (e.PrelaunchActivated == false)
@@ -107,20 +99,6 @@
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
-            }
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void App_BackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
-        {
-            if (NavigationService.CanGoBack)
-            {
-                NavigationService.GoBack();
-                e.Handled = true;
             }
         }
 

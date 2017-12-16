@@ -27,11 +27,14 @@
         public TipoReceitaListPage()
         {
             this.InitializeComponent();
+            this.Loaded += TipoReceitaListPage_Loaded;
         }
 
         #endregion
 
         #region Methods
+
+        #region Events
 
         /// <summary>
         /// 
@@ -53,6 +56,18 @@
         {
             if (this.Frame.CanGoBack) this.Frame.GoBack();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void TipoReceitaListPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            await ViewModel.Initialize();
+        }
+
+        #endregion
 
         #endregion
     }

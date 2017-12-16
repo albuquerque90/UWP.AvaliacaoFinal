@@ -31,7 +31,7 @@
     <Page.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="Nova Receita" Icon="Add" Click="{x:Bind ViewModel.AddTipoReceita_Click}" />
+                <AppBarButton Label="Add Tipo Receita" Icon="Add" Click="{x:Bind ViewModel.AddTipoReceita_Click}" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
