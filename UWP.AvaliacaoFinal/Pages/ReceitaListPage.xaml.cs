@@ -1,7 +1,5 @@
 ﻿namespace UWP.AvaliacaoFinal.Pages
 {
-    using Newtonsoft.Json;
-    using UWP.AvaliacaoFinal.Model;
     using UWP.AvaliacaoFinal.ViewModel;
     using Windows.UI.Core;
     using Windows.UI.Xaml.Controls;
@@ -10,7 +8,7 @@
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class IncluirReceitaPage : Page
+    public sealed partial class ReceitaListPage : Page
     {
         #region Properties
 
@@ -26,16 +24,17 @@
         /// <summary>
         /// 
         /// </summary>
-        public IncluirReceitaPage()
+        public ReceitaListPage()
         {
             this.InitializeComponent();
+            this.Loaded += TipoReceitaListPage_Loaded;
         }
 
         #endregion
 
         #region Methods
 
-        #region Eventss
+        #region Events
 
         /// <summary>
         /// 
@@ -43,12 +42,9 @@
         /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            var item = JsonConvert.DeserializeObject<Receita>(e.Parameter.ToString());
-
-            if (item != null)
-            {
-                ViewModel.Receita = item;
-            }
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
+            base.OnNavigatedTo(e);
         }
 
         /// <summary>
@@ -59,6 +55,16 @@
         private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
             if (this.Frame.CanGoBack) this.Frame.GoBack();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void TipoReceitaListPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            await ViewModel.Initialize();
         }
 
         #endregion

@@ -27,7 +27,6 @@
         public MainPage()
         {
             this.InitializeComponent();
-            this.Loaded += MainPage_Loaded;
         }
 
         #endregion
@@ -44,16 +43,6 @@
         private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
             if (this.Frame.CanGoBack) this.Frame.GoBack();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void MainPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            await ViewModel.Initialize();
         }
 
         #endregion

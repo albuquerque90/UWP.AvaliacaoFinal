@@ -3,8 +3,10 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using UWP.AvaliacaoFinal.Abstracts;
     using UWP.AvaliacaoFinal.Model;
+    using UWP.AvaliacaoFinal.Pages;
     using UWP.AvaliacaoFinal.Repositories;
     using UWP.AvaliacaoFinal.Services;
     using Windows.UI.Xaml.Controls;
@@ -20,7 +22,7 @@
         /// Sets a receita.
         /// </summary>
         private Receita _Receita;
-
+        
         #endregion
 
         #region Properties
@@ -31,7 +33,7 @@
         public EFReceitaRepository ReceitaRepository => EFReceitaRepository.Instance;
 
         /// <summary>
-        /// Gets a instância do repositório de tipos de receita.
+        /// Gets a instância do repositório de receita.
         /// </summary>
         public EFTipoReceitaRepository TipoReceitaRepository => EFTipoReceitaRepository.Instance;
 
@@ -41,10 +43,10 @@
         public ObservableCollection<Receita> Receitas => ReceitaRepository.Items;
 
         /// <summary>
-        /// Gets a coleção de tipos de receitas do repositório.
+        /// Gets a coleção de receitas do repositório.
         /// </summary>
         public ObservableCollection<TipoReceita> TiposReceita => TipoReceitaRepository.Items;
-        
+
         /// <summary>
         /// Gets or sets a receita.
         /// </summary>
@@ -59,23 +61,35 @@
         #region Methods
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task Initialize()
+        {
+            await ReceitaRepository.LoadAll();
+            await TipoReceitaRepository.LoadAll();
+        }
+
+        /// <summary>
+        /// Persiste a receita no banco de dados.
+        /// </summary>
+        public void AddReceita_Click()
+        {
+            NavigationService.Navigate<IncluirReceitaPage>(new Receita());
+        }
+
+        /// <summary>
         /// Persiste a receita no banco de dados.
         /// </summary>
         public async void SaveReceita_Click()
         {
             if (Receitas.Any(t => t.Id == Receita.Id))
-            {
                 await ReceitaRepository.Update(Receita);
-            }
             else
-            {
                 await ReceitaRepository.Create(Receita);
-            }
 
             if (NavigationService.CanGoBack)
-            {
                 NavigationService.GoBack();
-            }
         }
 
         /// <summary>
@@ -94,6 +108,7 @@
 
             dialog.PrimaryButtonClick += async (s, e) =>
             {
+                await Task.CompletedTask;
                 NavigationService.GoBack();
             };
 

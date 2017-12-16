@@ -73,18 +73,12 @@
         public async void SaveTipoReceita_Click()
         {
             if (TiposReceita.Any(t => t.Id == TipoReceita.Id))
-            {
                 await TipoReceitaRepository.Update(TipoReceita);
-            }
             else
-            {
                 await TipoReceitaRepository.Create(TipoReceita);
-            }
 
             if (NavigationService.CanGoBack)
-            {
                 NavigationService.GoBack();
-            }
         }
 
         /// <summary>
@@ -103,8 +97,8 @@
 
             dialog.PrimaryButtonClick += async (s, e) =>
             {
-                NavigationService.GoBack();
                 await Task.CompletedTask;
+                NavigationService.GoBack();
             };
 
             await dialog.ShowAsync();

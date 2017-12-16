@@ -28,8 +28,6 @@
             <TextBox Header="Descrição" Text="{x:Bind ViewModel.TipoReceita.Descricao, Mode=TwoWay}" Margin="-80,0,-80,0"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1" Grid.Row="1"/>
-
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="10,70,10,0">
             <Button x:Name="btnSave" Click="{x:Bind ViewModel.SaveTipoReceita_Click}">
                 <Button.Content >
