@@ -17,11 +17,12 @@
                     <DataTemplate x:DataType="model:Receita">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="250" />
+                                <ColumnDefinition Width="600" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{x:Bind Titulo}" Grid.Column="1" />
                             <TextBlock Text="{x:Bind TipoReceita.Descricao}" Grid.Column="1" />
+                            <TextBlock Text="{x:Bind Titulo}" Grid.Column="2" />
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

@@ -1,5 +1,6 @@
 ﻿namespace UWP.AvaliacaoFinal.Repositories
 {
+    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
@@ -41,7 +42,7 @@
             {
                 using (var context = new AppDbContext())
                 {
-                    foreach (var item in context.Receita.ToList())
+                    foreach (var item in context.Receita.Include(c => c.TipoReceita).ToList())
                     {
                         Items.Add(item);
                     }

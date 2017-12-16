@@ -17,7 +17,7 @@
         /// <summary>
         /// Gets or sets do id do tipo da receita.
         /// </summary>
-        public Guid TipoReceitaId { get; set; }
+        public virtual Guid TipoReceitaId { get; set; }
 
         /// <summary>
         /// Gets or sets do título.
