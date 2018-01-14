@@ -47,7 +47,13 @@
 
             if (item != null)
             {
+                txtTitle.Text = "Alteração de Receita";
                 ViewModel.Receita = item;
+            }
+            
+            if(item.Titulo == null)
+            {
+                txtTitle.Text = "Inclusão de Receita";
             }
         }
 

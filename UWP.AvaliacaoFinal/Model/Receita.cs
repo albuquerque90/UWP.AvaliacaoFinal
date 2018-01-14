@@ -1,5 +1,6 @@
 ﻿namespace UWP.AvaliacaoFinal.Model
 {
+    using Newtonsoft.Json;
     using System;
 
     /// <summary>
@@ -37,6 +38,7 @@
         /// <summary>
         /// Gets or sets do tipo de receita.
         /// </summary>
+        [JsonIgnore] 
         public virtual TipoReceita TipoReceita { get; set; }
 
         #endregion

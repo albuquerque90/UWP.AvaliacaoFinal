@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="1" Grid.Row="0">
-            <TextBlock Text="Inclusão de Receita" Style="{StaticResource TitleTextBlockStyle}" TextAlignment="Center" Margin="-100,0,-100,0" Width="300" Height="30" />
+            <TextBlock Name="txtTitle" Text="Inclusão de Receita" Style="{StaticResource TitleTextBlockStyle}" TextAlignment="Center" Margin="-100,0,-100,0" Width="300" Height="30" />
         </StackPanel>
 
         <StackPanel Grid.Column="1" Grid.Row="1">

@@ -12,7 +12,8 @@
         </Grid.ColumnDefinitions>
         
         <StackPanel Grid.Column="1">
-            <ListView ItemsSource="{x:Bind ViewModel.Receitas, Mode=OneWay}">
+            <ListView ItemsSource="{x:Bind ViewModel.Receitas, Mode=OneWay}"
+                      SelectionChanged="{x:Bind ViewModel.ReceitaItem_SelectionChanged}">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="model:Receita">
                         <Grid>
@@ -21,8 +22,8 @@
                                 <ColumnDefinition Width="600" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{x:Bind TipoReceita.Descricao}" Grid.Column="1" />
-                            <TextBlock Text="{x:Bind Titulo}" Grid.Column="2" />
+                            <!--<TextBlock Text="{x:Bind TipoReceita.Descricao}" Grid.Column="1" />-->
+                            <TextBlock Text="{x:Bind Titulo}" Grid.Column="1"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

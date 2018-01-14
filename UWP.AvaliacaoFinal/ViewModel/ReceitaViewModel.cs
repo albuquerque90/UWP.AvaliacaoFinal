@@ -1,5 +1,6 @@
 ﻿namespace UWP.AvaliacaoFinal.ViewModel
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -55,6 +56,14 @@
             get { return _Receita; }
             set { Set(ref _Receita, value); }
         }
+
+        public enum PageState
+        {
+            MinWidth0 = 0,
+            MinWidth700
+        }
+
+        public PageState State { get; set; }
 
         #endregion
 
@@ -113,6 +122,25 @@
             };
 
             await dialog.ShowAsync();
+        }
+
+        public void ReceitaItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var listView = (ListView)sender;
+
+            if (listView.SelectedItem == null)
+            {
+                return;
+            }
+
+            if (State == PageState.MinWidth700)
+            {
+                Receita = JsonConvert.DeserializeObject<Receita>(JsonConvert.SerializeObject(listView.SelectedItem));
+            }
+            else
+            {
+                NavigationService.Navigate<IncluirReceitaPage>(listView.SelectedItem);
+            }
         }
 
         #endregion
