@@ -16,8 +16,7 @@
             <RowDefinition Height="75" />
         </Grid.RowDefinitions>
 
-        <SplitView Grid.Column="0" IsPaneOpen="True"
-                   Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <SplitView Grid.Column="0" IsPaneOpen="True" OpenPaneLength="220" DisplayMode="Inline" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <SplitView.Pane>
                 <Grid>
                     <Grid.RowDefinitions>

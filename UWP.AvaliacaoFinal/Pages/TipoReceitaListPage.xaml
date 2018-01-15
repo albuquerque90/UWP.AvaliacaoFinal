@@ -29,7 +29,7 @@
     </Grid>
 
     <Page.BottomAppBar>
-        <CommandBar>
+        <CommandBar IsOpen="True" OverflowButtonVisibility="Collapsed" HorizontalAlignment="Center">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="Add Tipo Receita" Icon="Add" Click="{x:Bind ViewModel.AddTipoReceita_Click}" />
             </CommandBar.PrimaryCommands>
