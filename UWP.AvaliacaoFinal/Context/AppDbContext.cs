@@ -1,7 +1,10 @@
 ﻿namespace UWP.AvaliacaoFinal.Context
 {
     using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Threading.Tasks;
     using UWP.AvaliacaoFinal.Model;
+    using Windows.Storage;
 
     /// <summary>
     /// Defines the app database context.
@@ -30,7 +33,7 @@
         /// <param name="optionsBuilder">A builder used to create or modify options for this context.</param>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=UWP_APP.db");
+            optionsBuilder.UseSqlite(GetAppSetings().GetAwaiter().GetResult());
         }
 
         /// <summary>
@@ -75,6 +78,21 @@
 
             base.OnModelCreating(modelBuilder);
         }
+
+        #region Auxiliary
+
+        /// <summary>
+        /// Gets the app settings file.
+        /// </summary>
+        /// <returns></returns>
+        private async Task<string> GetAppSetings()
+        {
+            var storageFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///AppSettings.xml"));
+
+            return await FileIO.ReadTextAsync(storageFile);
+        }
+
+        #endregion
 
         #endregion
     }

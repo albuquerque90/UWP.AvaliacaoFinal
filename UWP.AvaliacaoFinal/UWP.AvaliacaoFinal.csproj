@@ -136,6 +136,7 @@
     <None Include="UWP.AvaliacaoFinal_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AppSettings.xml" />
     <Content Include="Images\bolo.jpg" />
     <Content Include="Images\recipe.png" />
     <Content Include="Properties\Default.rd.xml" />
